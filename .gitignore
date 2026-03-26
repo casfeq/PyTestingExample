@@ -1,0 +1,6 @@
+# Compiled files
+*.pyc
+
+# Folders
+.pytest_cache
+__pycache__/
