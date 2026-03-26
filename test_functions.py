@@ -8,8 +8,14 @@ def test_add():
     assert add("space", "ship") == "spaceship"
 
 
+def test_multiply():
+    assert multiply(2, 3) == 6
+    assert multiply(2, -3) == -6
+    assert multiply('ha', 3) == 'hahaha'
+
+
 def test_subtract():
-   assert subtract(3,2) == 1
+   assert subtract(3, 2) == 1
 
 
 def test_convert_fahrenheit_to_celsius():
