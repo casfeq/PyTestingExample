@@ -2,6 +2,7 @@ import random
 from functions import roll_dice, yahtzee
 from functions import add, subtract, multiply
 from functions import convert_fahrenheit_to_celsius as f2c
+from functions import fizzbuzz
 import pytest
 
 
@@ -46,3 +47,45 @@ def test_yahtzee_probability():
     successes = sum(yahtzee() for _ in range(n))
     p = successes/n
     assert 0.042 <= p <= 0.050
+    
+    
+def test_fizzbuzz_multiples_of_three():
+    assert fizzbuzz(3) == 'Fizz'
+    assert fizzbuzz(6) == 'Fizz'
+
+
+def test_fizzbuzz_multiples_of_five():
+    assert fizzbuzz(5) == 'Buzz'
+    assert fizzbuzz(10) == 'Buzz'
+
+
+def test_fizzbuzz_multiples_of_three_and_five():
+    assert fizzbuzz(15) == 'FizzBuzz'
+    assert fizzbuzz(30) == 'FizzBuzz'
+
+
+def test_fizzbuzz_other_integers():
+    assert fizzbuzz(1) == 1
+    assert fizzbuzz(2) == 2
+    assert fizzbuzz(7) == 7
+
+
+def test_fizzbuzz_zero_raises():
+    with pytest.raises(ValueError):
+        fizzbuzz(0)
+
+
+def test_fizzbuzz_negative_raises():
+    with pytest.raises(ValueError):
+        fizzbuzz(-1)
+    with pytest.raises(ValueError):
+        fizzbuzz(-15)
+
+
+def test_fizzbuzz_non_integer_raises():
+    with pytest.raises(TypeError):
+        fizzbuzz(3.5)
+    with pytest.raises(TypeError):
+        fizzbuzz('3')
+    with pytest.raises(TypeError):
+        fizzbuzz(None)
