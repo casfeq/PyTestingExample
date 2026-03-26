@@ -1,3 +1,5 @@
+import random
+from functions import roll_dice, yahtzee
 from functions import add, subtract, multiply
 from functions import convert_fahrenheit_to_celsius as f2c
 from functions import fizzbuzz
@@ -25,6 +27,28 @@ def test_convert_fahrenheit_to_celsius():
    with pytest.raises(AssertionError):
        f2c(-600)
 
+
+def test_roll_dice_with_fixed_seed():
+    random.seed(12345)
+    assert roll_dice() == [4, 6, 1, 3, 3]
+
+
+def test_yahtzee_probability_smaller_sample():
+    random.seed(12345)
+    n = 20000
+    successes = sum(yahtzee() for _ in range(n))
+    p = successes/n
+    assert 0.040 <= p <= 0.052
+
+
+def test_yahtzee_probability():
+    random.seed(12345)
+    n = 100000
+    successes = sum(yahtzee() for _ in range(n))
+    p = successes/n
+    assert 0.042 <= p <= 0.050
+    
+    
 def test_fizzbuzz_multiples_of_three():
     assert fizzbuzz(3) == 'Fizz'
     assert fizzbuzz(6) == 'Fizz'

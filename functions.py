@@ -1,3 +1,6 @@
+import random
+
+
 def add(a, b):
     return a + b
 
@@ -15,6 +18,20 @@ def convert_fahrenheit_to_celsius(fahrenheit):
     return multiply(subtract(fahrenheit, 32), 5 / 9)
 
 
+def roll_dice(n=5):
+    return [random.randint(1, 6) for _ in range(n)]
+
+
+def yahtzee():
+    dice = roll_dice()
+    for _ in range(2):
+        counts = {x:dice.count(x) for x in set(dice)}
+        keep_value = max(counts, key=counts.get)
+        dice = [x for x in dice if x == keep_value]
+        dice += [random.randint(1, 6) for _ in range(5 - len(dice))]
+    return len(set(dice)) == 1
+  
+  
 def fizzbuzz(n):
     if not isinstance(n,int):
         raise TypeError('Input must be integer')
